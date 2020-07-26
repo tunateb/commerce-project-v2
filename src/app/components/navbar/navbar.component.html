@@ -1,0 +1,34 @@
+<!-- <nav class="navbar">
+  <a routerLink="/" class="app-logo">Auth App</a>
+
+  <div class="nav-links" *ngIf="!user; else userMenu">
+    <a routerLink="/register" class="nav-link">Register</a>
+    <a routerLink="/login" class="nav-link">Login</a>
+  </div>
+
+  <ng-template #userMenu>
+    <div>Hello, {{ user.username }}</div>
+
+    <a href="#" class="nav-link" (click) = "logout()">Logout</a>
+  </ng-template>
+</nav> -->
+
+<mat-toolbar color="primary">
+  <a mat-button routerLink="/">
+    <h1>My Shop</h1>
+  </a>
+
+  <span class="spacer"></span>
+
+  <ng-container *ngIf="!user; else userMenu">
+    <a mat-flat-button routerLink="/register">Register</a>
+    <a mat-flat-button routerLink="/login">Login</a>
+  </ng-container>
+
+  <ng-template #userMenu>
+    <span>Hello, {{ user.username }}</span>
+    <a mat-flat-button routerLink = "/profile">My Profile</a>
+    <button mat-flat-button (click)="logout()">Logout</button>
+  </ng-template>
+
+</mat-toolbar>

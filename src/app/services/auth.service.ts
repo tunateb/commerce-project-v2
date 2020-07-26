@@ -8,7 +8,6 @@ import { User } from '../types/user.type';
 })
 export class AuthService {
   baseUrl = 'http://localhost:1337/auth';
-  // jwt: string;
 
   constructor(private http: HttpClient, private userService: UserService) {}
 
@@ -21,7 +20,6 @@ export class AuthService {
   }
 
   logout() {
-    // this.jwt = '';
     window.localStorage.removeItem('token');
     this.userService.setUser();
   }
@@ -29,5 +27,9 @@ export class AuthService {
   setToken(token: string) {
     // this.jwt = token;
     window.localStorage.setItem('token', token);
+  }
+
+  isAuthenticated():boolean {
+    return !!window.localStorage.getItem('token')
   }
 }

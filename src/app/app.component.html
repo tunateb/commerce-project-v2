@@ -1,16 +1,3 @@
-<nav class="navbar">
-  <a routerLink="/" class="app-logo">Auth App</a>
+<app-navbar></app-navbar>
 
-  <div class="nav-links" *ngIf="!user; else userMenu">
-    <a routerLink="/register" class="nav-link">Register</a>
-    <a routerLink="/login" class="nav-link">Login</a>
-  </div>
-
-  <ng-template #userMenu>
-    <div>Hello, {{ user.username }}</div>
-
-    <a href="#" class="nav-link" (click) = "logout()">Logout</a>
-  </ng-template>
-</nav>
-
-<div class="container"><router-outlet></router-outlet></div>
+<div><router-outlet></router-outlet></div>
