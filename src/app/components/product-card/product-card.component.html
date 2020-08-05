@@ -1,0 +1,36 @@
+<mat-card class="card">
+  <mat-card-header class="card-header">
+    <mat-card-title class="product-title">{{ product.name }}</mat-card-title>
+  </mat-card-header>
+  <div class="product-img-wrapper">
+    <img
+      mat-card-image
+      [src]="'http://localhost:1337' + product.img[0].url"
+      alt="product-img"
+      class="product-img"
+    />
+  </div>
+  <div class="chips-wrapper">
+    <mat-chip-list>
+      <mat-chip *ngFor="let category of product.categories">
+        <small>{{ category.name }}</small>
+      </mat-chip>
+    </mat-chip-list>
+  </div>
+
+  <mat-card-content>
+    <p class="product-desc">
+      {{ product.description }}
+    </p>
+  </mat-card-content>
+
+  <h2>{{ product.price }} $</h2>
+
+  <mat-divider></mat-divider>
+
+  <mat-card-actions>
+    <button mat-flat-button color="primary" class="btn">
+      Add to Cart
+    </button>
+  </mat-card-actions>
+</mat-card>
