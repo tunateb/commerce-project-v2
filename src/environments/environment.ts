@@ -4,5 +4,6 @@ export const environment = {
   production: false,
   baseApiURL: baseURL,
   usersApiURL: `${baseURL}/users`,
-  productsApiURL: `${baseURL}/products`
+  productsApiURL: `${baseURL}/products`,
+  categoriesApiURL: `${baseURL}/categories`
 };

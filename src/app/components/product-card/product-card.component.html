@@ -1,7 +1,8 @@
-<mat-card class="card">
+<mat-card class="product-card">
   <mat-card-header class="card-header">
     <mat-card-title class="product-title">{{ product.name }}</mat-card-title>
   </mat-card-header>
+  <mat-divider></mat-divider>
   <div class="product-img-wrapper">
     <img
       mat-card-image
@@ -22,14 +23,13 @@
     <p class="product-desc">
       {{ product.description }}
     </p>
+    <h2>{{ product.price }} $</h2>
+
+    <mat-divider></mat-divider>
   </mat-card-content>
 
-  <h2>{{ product.price }} $</h2>
-
-  <mat-divider></mat-divider>
-
-  <mat-card-actions>
-    <button mat-flat-button color="primary" class="btn">
+  <mat-card-actions *ngIf="user">
+    <button mat-raised-button color="primary" class="btn">
       Add to Cart
     </button>
   </mat-card-actions>
