@@ -1,19 +1,45 @@
 <mat-sidenav-container class="container">
   <mat-sidenav opened mode="side">
-      <app-sidebar></app-sidebar>
+    <app-sidebar></app-sidebar>
   </mat-sidenav>
   <mat-sidenav opened mode="side" position="end">End content</mat-sidenav>
 
-  <div *ngIf = "!filteredProducts; else filteredLayout">
-    <mat-grid-list cols="2">
-      <mat-grid-tile *ngFor="let product of products">
-        <app-product-card [product]="product" [user]="user"></app-product-card>
-      </mat-grid-tile>
-    </mat-grid-list>
+  <div *ngIf="!filteredProducts; else filteredLayout">
+    <div class="paginator-wrapper">
+      <mat-paginator
+        [length]="products.length"
+        [pageSize]="pageSize"
+        [pageSizeOptions]="pageSizeOptions"
+        (page)="onPageChange($event)"
+      >
+      </mat-paginator>
+    </div>
+
+    <ng-container *ngIf="pagedList; else mainLayout">
+      <mat-grid-list cols="2">
+        <mat-grid-tile *ngFor="let product of pagedList">
+          <app-product-card
+            [product]="product"
+            [user]="user"
+          ></app-product-card>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </ng-container>
+
+    <ng-template #mainLayout>
+      <mat-grid-list cols="2">
+        <mat-grid-tile *ngFor="let product of products">
+          <app-product-card
+            [product]="product"
+            [user]="user"
+          ></app-product-card>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </ng-template>
   </div>
 
   <ng-template #filteredLayout>
-      <mat-grid-list cols="2">
+    <mat-grid-list cols="2">
       <mat-grid-tile *ngFor="let product of filteredProducts">
         <app-product-card [product]="product" [user]="user"></app-product-card>
       </mat-grid-tile>

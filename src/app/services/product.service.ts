@@ -29,6 +29,7 @@ export class ProductService {
   getProducts() {
     return this.products;
   }
+  
 
   getFilteredProducts() {
     return this.filteredProducts;
@@ -39,10 +40,12 @@ export class ProductService {
   }
 
   filterProducts(genreId) {
-    this.filteredProducts = this.products.filter(product => product.categories.some(category => category.id === genreId))
+    this.filteredProducts = this.products.filter((product) =>
+      product.categories.some((category) => category.id === genreId)
+    );
   }
 
   resetFilters() {
-    this.filteredProducts = null
+    this.filteredProducts = null;
   }
 }

@@ -1,6 +1,9 @@
 <mat-card class="product-card">
   <mat-card-header class="card-header">
     <mat-card-title class="product-title">{{ product.name }}</mat-card-title>
+    <h3 class="product-rating" *ngIf="product.rating">
+      {{ product.rating }}
+    </h3>
   </mat-card-header>
   <mat-divider></mat-divider>
   <div class="product-img-wrapper">
