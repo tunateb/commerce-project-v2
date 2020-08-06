@@ -1,0 +1,21 @@
+<div *ngFor="let cart of userCart">
+  <h3>YOUR CART ({{ cart.products.length }})</h3>
+  <mat-divider></mat-divider>
+  <div class="user-cart" *ngFor="let product of cart.products">
+    <img
+      [src]="'http://localhost:1337' + product.img[0].url"
+      alt="product-img"
+      class="product-img"
+    />
+    <p class="product-name">
+      {{ product.name }}
+    </p>
+    <p class="product-price">{{ product.price }} $</p>
+    <div class="cart-actions">
+      <button mat-stroked-button color="warn" class="btn">Remove</button>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+
+  <p class="total-price">Total = {{ getTotal() }} $</p>
+</div>

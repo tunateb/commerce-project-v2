@@ -1,8 +1,8 @@
-
 <mat-toolbar color="primary">
   <a mat-button routerLink="/">
     <h1>Games Shop</h1>
   </a>
+  
 
   <span class="spacer"></span>
 
@@ -12,9 +12,17 @@
   </ng-container>
 
   <ng-template #userMenu>
+    <img [src]="user.avatarUrl" alt="avatar" class="avatar" />
     <span>Hello, {{ user.username }}</span>
-    <a mat-flat-button routerLink = "/profile" class="btn">My Profile</a>
+    <span class="spacer"></span>
+
+    <a routerLink="/checkout" mat-button *ngFor = "let cart of userCart"
+      ><mat-icon [matBadge]="cart.products.length" matBadgeColor="warn" class="cart-icon"
+        >shopping_cart</mat-icon
+      ></a
+    >
+
+    <a mat-flat-button routerLink="/profile" class="btn">My Profile</a>
     <button mat-flat-button (click)="logout()">Logout</button>
   </ng-template>
-
 </mat-toolbar>

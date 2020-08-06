@@ -20,6 +20,14 @@ export class ProductService {
     });
   }
 
+  fetchSortedProducts(sortType: string, sortDirection: string) {
+    this.http
+      .get(`${env.productsApiURL}/?_sort=${sortType}:${sortDirection}`)
+      .subscribe((response: Product[]) => {
+        this.products = response;
+      });
+  }
+
   fetchCategories() {
     this.http.get(env.categoriesApiURL).subscribe((response: Category[]) => {
       this.categories = response;
@@ -29,7 +37,6 @@ export class ProductService {
   getProducts() {
     return this.products;
   }
-  
 
   getFilteredProducts() {
     return this.filteredProducts;

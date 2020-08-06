@@ -39,7 +39,7 @@ export class RegisterPageComponent implements OnInit {
     this.authService
       .register(registerData)
       .subscribe((response: AuthResponse) => {
-        console.log(response);
+        
         this.userService.setUser(response.user);
         this.authService.setToken(response.jwt);
 

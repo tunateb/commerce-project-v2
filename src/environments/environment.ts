@@ -5,5 +5,7 @@ export const environment = {
   baseApiURL: baseURL,
   usersApiURL: `${baseURL}/users`,
   productsApiURL: `${baseURL}/products`,
-  categoriesApiURL: `${baseURL}/categories`
+  categoriesApiURL: `${baseURL}/categories`,
+  cartsApiURL: `${baseURL}/carts`,
+  addressApiURL: `${baseURL}/addresses`,
 };

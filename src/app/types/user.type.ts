@@ -1,3 +1,6 @@
+import { Cart } from './cart.type';
+import { Address } from './address.type';
+
 export type User = {
   blocked: Boolean | null;
   confirmed: Boolean;
@@ -8,4 +11,9 @@ export type User = {
   role: object;
   updated_at?: string;
   username: string;
+  avatar: any;
+  avatarUrl: string;
+  cart: Cart;
+  address: Address
+
 };

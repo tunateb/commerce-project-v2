@@ -1,0 +1,52 @@
+<div class="container-sm">
+  <h1 class="checkout-title">Checkout</h1>
+  <div class="grid-container">
+    <div class="shipping-details">
+      <h3>SHIPPING DETAILS</h3>
+      <mat-divider></mat-divider>
+
+      <div *ngFor="let address of userAddress" class="user-details">
+        <div>
+          <p>{{ address.user.fullname }}</p>
+          <p>{{ address.streetName }}</p>
+          <p>{{ address.suite }}</p>
+          <p>{{ address.city }} / {{ address.country }}</p>
+        </div>
+        <div>
+          <p>{{ address.user.email }}</p>
+        </div>
+      </div>
+
+      <div class="payment-details">
+        <h3>PAYMENT DETAILS</h3>
+        <mat-divider></mat-divider>
+        <div class="form-wrapper">
+          <form>
+            <div class="form-control">
+              <label for="name">NAME ON CARD</label>
+              <input type="text" id="name" class="form-input" />
+            </div>
+            <div class="form-control">
+              <label for="card-number">CARD NUMBER</label>
+              <input type="text" id="card-number" class="form-input" />
+            </div>
+            <div class="form-flex">
+              <div class="form-control">
+                <label for="valid-date">VALID UNTIL</label>
+                <input type="text" id="valid-date" class="form-input-sm" />
+              </div>
+              <div class="form-control">
+                <label for="cvc-code">CVC CODE</label>
+                <input type="text" id="cvc-code" class="form-input-sm" />
+              </div>
+            </div>
+            <button mat-flat-button color="primary" class="btn">PURCHASE</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="order-details">
+      <app-cart></app-cart>
+    </div>
+  </div>
+</div>

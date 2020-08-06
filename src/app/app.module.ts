@@ -13,6 +13,9 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule, matFormFieldAnimations } from '@angular/material/form-field';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule, matDialogAnimations } from '@angular/material/dialog';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,9 +27,11 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { CartComponent } from './components/cart/cart.component';
+import { CheckoutPageComponent } from './pages/checkout-page/checkout-page.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginPageComponent, RegisterPageComponent, NavbarComponent, HomePageComponent, ProfilePageComponent, ProductCardComponent, SidebarComponent],
+  declarations: [AppComponent, LoginPageComponent, RegisterPageComponent, NavbarComponent, HomePageComponent, ProfilePageComponent, ProductCardComponent, SidebarComponent, CartComponent, CheckoutPageComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -42,7 +47,11 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
     MatDividerModule,
     MatSelectModule,
     MatFormFieldModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatBadgeModule,
+    MatIconModule,
+    MatDialogModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent],

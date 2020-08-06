@@ -8,6 +8,7 @@ import { ProfilePageComponent } from './pages/profile-page/profile-page.componen
 
 import { AuthGuard } from './guards/auth.guard';
 import { PublicGuard } from './guards/public.guard';
+import { CheckoutPageComponent } from './pages/checkout-page/checkout-page.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
@@ -21,6 +22,10 @@ const routes: Routes = [
     path: 'profile',
     component: ProfilePageComponent,
     canActivate: [AuthGuard],
+  },
+  {
+    path: 'checkout',
+    component: CheckoutPageComponent,
   },
 ];
 
