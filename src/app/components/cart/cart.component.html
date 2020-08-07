@@ -12,10 +12,10 @@
     </p>
     <p class="product-price">{{ product.price }} $</p>
     <div class="cart-actions">
-      <button mat-stroked-button color="warn" class="btn">Remove</button>
+      <button mat-stroked-button color="warn" class="btn" (click) = "removeFromCart(product)">Remove</button>
     </div>
   </div>
   <mat-divider></mat-divider>
 
-  <p class="total-price">Total = {{ getTotal() }} $</p>
+  <p class="total-price">Total = {{ getTotal() | number }} $</p>
 </div>

@@ -32,7 +32,7 @@
   </mat-card-content>
 
   <mat-card-actions *ngIf="user">
-    <button mat-raised-button color="primary" class="btn">
+    <button mat-raised-button color="primary" class="btn" (click) = "addToCart(product)">
       Add to Cart
     </button>
   </mat-card-actions>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/services/cart.service';
+import { Product } from 'src/app/types/product.type';
 
 @Component({
   selector: 'app-cart',
@@ -25,5 +26,9 @@ export class CartComponent implements OnInit {
       total += products[i].price;
     }
     return total;
+  }
+
+  removeFromCart(product: Product) {
+    this.cartService.removeFromCart(product)
   }
 }

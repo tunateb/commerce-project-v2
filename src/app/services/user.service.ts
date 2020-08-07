@@ -32,7 +32,6 @@ export class UserService {
       })
       .subscribe((response: User) => {
         this.user = response;
-        console.log(this.user)
         this.getDetails();
       });
   }

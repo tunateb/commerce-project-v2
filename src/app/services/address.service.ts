@@ -15,7 +15,7 @@ export class AddressService {
     this.http
       .get(`${env.addressApiURL}/?user=2`)
       .subscribe((response: Address) => {
-        console.log(response);
+        // console.log(response);
         this.userAddress = response;
       });
   }
