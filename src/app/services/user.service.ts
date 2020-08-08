@@ -12,7 +12,10 @@ export class UserService {
 
   baseUrl = 'http://localhost:1337/users';
 
-  constructor(private http: HttpClient, private cartService: CartService) {}
+  constructor(
+    private http: HttpClient, 
+    private cartService: CartService
+  ) {}
 
   setUser(user: User = null) {
     this.user = user;
@@ -36,6 +39,7 @@ export class UserService {
         this.user = response;
         
         this.getDetails();
+        this.cartService.fetchUserCart(this.user.id)
       });
   }
 

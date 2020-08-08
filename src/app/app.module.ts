@@ -29,9 +29,10 @@ import { ProductCardComponent } from './components/product-card/product-card.com
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { CartComponent } from './components/cart/cart.component';
 import { CheckoutPageComponent } from './pages/checkout-page/checkout-page.component';
+import { QuantityPipe } from './pipes/quantity.pipe';
 
 @NgModule({
-  declarations: [AppComponent, LoginPageComponent, RegisterPageComponent, NavbarComponent, HomePageComponent, ProfilePageComponent, ProductCardComponent, SidebarComponent, CartComponent, CheckoutPageComponent],
+  declarations: [AppComponent, LoginPageComponent, RegisterPageComponent, NavbarComponent, HomePageComponent, ProfilePageComponent, ProductCardComponent, SidebarComponent, CartComponent, CheckoutPageComponent, QuantityPipe],
   imports: [
     BrowserModule,
     AppRoutingModule,

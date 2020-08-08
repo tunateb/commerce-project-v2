@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
 import { AuthResponse } from '../../types/authResponse.type';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-login-page',
@@ -20,6 +21,7 @@ export class LoginPageComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private userService: UserService,
+    private cartService: CartService,
     private router: Router
   ) {}
 
@@ -31,6 +33,7 @@ export class LoginPageComponent implements OnInit {
     this.authService.login(this.form).subscribe((response: AuthResponse) => {
       this.authService.setToken(response.jwt);
       this.userService.setUser(response.user);
+      this.cartService.fetchUserCart(response.user.id)
 
       this.isLoading = false;
 

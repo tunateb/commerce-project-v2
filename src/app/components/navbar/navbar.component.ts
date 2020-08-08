@@ -17,15 +17,17 @@ export class NavbarComponent implements OnInit {
     return this.cartService.getUserCart()
   }
 
+  get cartLength() {
+    return this.userCart.orders.reduce((total, order) => order.quantity + total, 0)
+  }
+
   constructor(
     private userService: UserService,
     private authService: AuthService,
     private cartService: CartService
   ) {}
 
-  ngOnInit(): void {
-    this.cartService.fetchUserCart()
-  }
+  ngOnInit(): void {}
 
   logout() {
     this.authService.logout();

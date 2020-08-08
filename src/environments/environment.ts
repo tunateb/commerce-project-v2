@@ -8,4 +8,6 @@ export const environment = {
   categoriesApiURL: `${baseURL}/categories`,
   cartsApiURL: `${baseURL}/carts`,
   addressApiURL: `${baseURL}/addresses`,
+  orderApiURL: `${baseURL}/orders`,
+  purcaseApiURL: `${baseURL}/purchases`
 };

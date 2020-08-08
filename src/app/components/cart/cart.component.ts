@@ -13,25 +13,29 @@ export class CartComponent implements OnInit {
     return this.cartService.getUserCart();
   }
 
+  get cartProducts() {
+    return this.cartService.getCartProducts();
+  }
+
   get user() {
     return this.userService.getUser()
   }
 
+  get getTotal() {
+    if (this.cartProducts) {
+      return this.cartProducts.reduce((total, product) => {
+        const productOrder = this.userCart.orders.find(order => order.product === product.id)
+  
+        const productTotalPrice = product.price * productOrder.quantity
+  
+        return total + productTotalPrice;
+      }, 0)
+    }
+  }
+
   constructor(private cartService: CartService, private userService: UserService) {}
 
-  ngOnInit(): void {
-    this.cartService.fetchUserCart();
-  }
-
-  getTotal() {
-    const products = this.userCart[0].products;
-    let total = 0;
-
-    for (let i = 0; i < products.length; i++) {
-      total += products[i].price;
-    }
-    return total;
-  }
+  ngOnInit(): void {}
 
   removeFromCart(product: Product) {
     this.cartService.removeFromCart(product, this.user.id )

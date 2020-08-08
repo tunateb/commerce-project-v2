@@ -2,7 +2,6 @@
   <a mat-button routerLink="/">
     <h1>Games Shop</h1>
   </a>
-  
 
   <span class="spacer"></span>
 
@@ -16,8 +15,8 @@
     <span>Hello, {{ user.username }}</span>
     <span class="spacer"></span>
 
-    <a routerLink="/checkout" mat-button *ngFor = "let cart of userCart"
-      ><mat-icon [matBadge]="cart.products.length" matBadgeColor="warn" class="cart-icon"
+    <a routerLink="/checkout" mat-button *ngIf = "userCart"
+      ><mat-icon [matBadge]="cartLength" matBadgeColor="warn" class="cart-icon"
         >shopping_cart</mat-icon
       ></a
     >
