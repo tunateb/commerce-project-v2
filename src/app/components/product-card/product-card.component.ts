@@ -18,6 +18,6 @@ export class ProductCardComponent implements OnInit {
   
   addToCart(product: Product) {
     
-    this.cartService.addToCart(product)
+    this.cartService.addToCart(product, this.user.id)
   }
 }

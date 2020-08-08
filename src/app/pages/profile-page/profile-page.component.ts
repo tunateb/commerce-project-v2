@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from 'src/app/services/user.service';
+import { AddressService } from 'src/app/services/address.service';
 
 @Component({
   selector: 'app-profile-page',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfilePageComponent implements OnInit {
 
-  constructor() { }
+  get user() {
+   return this.userService.getUser()
+  }
+
+  get userAddress() {
+    return this.addressService.getUserAddress()
+  }
+
+  constructor(private userService:UserService, private addressService:AddressService) { }
 
   ngOnInit(): void {
+    this.addressService.fetchUserAddress()
   }
 
 }

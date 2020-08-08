@@ -12,7 +12,7 @@
   </ng-container>
 
   <ng-template #userMenu>
-    <img [src]="user.avatarUrl" alt="avatar" class="avatar" />
+    <img [src]="user.avatarUrl" alt="avatar" class="avatar" *ngIf = "user.avatarUrl"/>
     <span>Hello, {{ user.username }}</span>
     <span class="spacer"></span>
 

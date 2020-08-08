@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment as env } from '../../environments/environment';
-import { UserService } from './user.service';
 import { Cart } from '../types/cart.type';
-import { User } from '../types/user.type';
 import { Product } from '../types/product.type';
 
 @Injectable({
@@ -12,15 +10,10 @@ import { Product } from '../types/product.type';
 export class CartService {
   private userCart: Cart;
 
-  constructor(private http: HttpClient, private userService: UserService) {}
-
-  get user() {
-    return this.userService.getUser();
-  }
+  constructor(private http: HttpClient) {}
 
   fetchUserCart() {
     this.http.get(`${env.cartsApiURL}?user=2`).subscribe((response: Cart) => {
-      // console.log(response);
       this.userCart = response;
     });
   }
@@ -46,35 +39,31 @@ export class CartService {
       });
   }
 
-  addToCart(newProduct: Product) {
+  addToCart(newProduct: Product, userId: number) {
     this.userCart[0].products.push(newProduct);
 
     const updatedCart: Cart = {
       products: this.userCart[0].products,
-      user: this.user.id,
+      user: userId,
       id: this.userCart[0].id,
     };
-    
-    this.updateCart(updatedCart)
 
-    // console.log(updatedCart)
+    this.updateCart(updatedCart);
   }
 
-  removeFromCart(product) {
+  removeFromCart(product: Product, userId: number) {
     const productIndex = this.userCart[0].products.findIndex(
       (p) => p.id === product.id
     );
 
     this.userCart[0].products.splice(productIndex, 1);
- 
 
     const updatedCart: Cart = {
       products: this.userCart[0].products,
-      user: this.user.id,
+      user: userId,
       id: this.userCart[0].id,
     };
 
-    this.updateCart(updatedCart)
-    
+    this.updateCart(updatedCart);
   }
 }

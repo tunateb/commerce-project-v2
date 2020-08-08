@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { User } from '../types/user.type';
 import { HttpClient } from '@angular/common/http';
 import { environment as env } from '../../environments/environment';
+import { CartService } from './cart.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +12,7 @@ export class UserService {
 
   baseUrl = 'http://localhost:1337/users';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private cartService: CartService) {}
 
   setUser(user: User = null) {
     this.user = user;
@@ -31,7 +32,9 @@ export class UserService {
         headers: { Authorization: `Bearer ${token}` },
       })
       .subscribe((response: User) => {
+        console.log(response);
         this.user = response;
+        
         this.getDetails();
       });
   }

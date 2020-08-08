@@ -13,7 +13,8 @@ export type User = {
   username: string;
   avatar: any;
   avatarUrl: string;
-  cart: Cart;
-  address: Address
+  cart: Cart | number;
+  address: Address;
+  fullname:string
 
 };

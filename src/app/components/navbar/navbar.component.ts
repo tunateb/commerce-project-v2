@@ -24,7 +24,7 @@ export class NavbarComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.cartService.fetchUserCart();
+    this.cartService.fetchUserCart()
   }
 
   logout() {
