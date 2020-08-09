@@ -16,6 +16,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule, matDialogAnimations } from '@angular/material/dialog';
+import {MatInputModule} from '@angular/material/input';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -30,9 +31,11 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { CartComponent } from './components/cart/cart.component';
 import { CheckoutPageComponent } from './pages/checkout-page/checkout-page.component';
 import { QuantityPipe } from './pipes/quantity.pipe';
+import { OrderItemComponent } from './components/order-item/order-item.component';
+import { AutoFocusDirective } from './directives/auto-focus.directive';
 
 @NgModule({
-  declarations: [AppComponent, LoginPageComponent, RegisterPageComponent, NavbarComponent, HomePageComponent, ProfilePageComponent, ProductCardComponent, SidebarComponent, CartComponent, CheckoutPageComponent, QuantityPipe],
+  declarations: [AppComponent, LoginPageComponent, RegisterPageComponent, NavbarComponent, HomePageComponent, ProfilePageComponent, ProductCardComponent, SidebarComponent, CartComponent, CheckoutPageComponent, QuantityPipe, OrderItemComponent, AutoFocusDirective],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -51,7 +54,8 @@ import { QuantityPipe } from './pipes/quantity.pipe';
     MatPaginatorModule,
     MatBadgeModule,
     MatIconModule,
-    MatDialogModule
+    MatDialogModule,
+    MatInputModule,
     
   ],
   providers: [],

@@ -21,25 +21,33 @@
         <h3>PAYMENT DETAILS</h3>
         <mat-divider></mat-divider>
         <div class="form-wrapper">
-          <form>
-            <div class="form-control">
-              <label for="name">NAME ON CARD</label>
-              <input type="text" id="name" class="form-input" />
+          <form (submit)="purchase()">
+            <mat-form-field class="full-width">
+              <mat-label>Name on Card</mat-label>
+              <input [(ngModel)]="cardName" name="cardName" matInput type="text" />
+              <mat-icon matSuffix>account_box</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field class="full-width">
+              <mat-label>Credit Card Number</mat-label>
+              <input [(ngModel)]="cardNumber" name="cardNumber" matInput type="text">
+              <mat-icon matSuffix>credit_card</mat-icon>
+            </mat-form-field>
+
+            <div class="half-input-wrapper">
+              <mat-form-field class="half-width">
+                <mat-label>Exp. Date</mat-label>
+                <input [(ngModel)]="expDate" name="expDate" matInput text="text">
+                <mat-icon matSuffix>event</mat-icon>
+              </mat-form-field>
+  
+              <mat-form-field class="half-width">
+                <mat-label>CVC</mat-label>
+                <input [(ngModel)]="cvc" name="cvc" matInput text="text">
+                <mat-icon matSuffix>lock</mat-icon>
+              </mat-form-field>
             </div>
-            <div class="form-control">
-              <label for="card-number">CARD NUMBER</label>
-              <input type="text" id="card-number" class="form-input" />
-            </div>
-            <div class="form-flex">
-              <div class="form-control">
-                <label for="valid-date">VALID UNTIL</label>
-                <input type="text" id="valid-date" class="form-input-sm" />
-              </div>
-              <div class="form-control">
-                <label for="cvc-code">CVC CODE</label>
-                <input type="text" id="cvc-code" class="form-input-sm" />
-              </div>
-            </div>
+
             <button mat-flat-button color="primary" class="btn">PURCHASE</button>
           </form>
         </div>

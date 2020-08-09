@@ -1,31 +1,4 @@
-.user-cart {
-  display: grid;
-  grid-template-columns: 2fr 6fr 2fr 2fr;
-  grid-gap: 20px;
-  text-align: center;
-  margin: 10px;
 
-  .product-img {
-    width: 80px;
-    height: 80px;
-    object-fit: contain;
-  }
-
-  .product-name {
-    display: flex;
-    align-items: center;
-    font-size: 18px;
-  }
-
-  .product-price {
-    display: flex;
-    align-items: center;
-  }
-
-  .cart-actions {
-      padding-top: 15px;
-  }
-}
 
 .total-price {
     display: flex;

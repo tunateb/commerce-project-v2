@@ -1,20 +1,13 @@
-<div *ngIf="userCart">
-  <h3>YOUR CART ({{ userCart.orders.length }})</h3>
+<div *ngIf="userCart && userCart.orders.length">
+  <h3>YOUR CART ({{ totalQuantity }})</h3>
   <mat-divider></mat-divider>
-  <div class="user-cart" *ngFor="let product of cartProducts">
-    <img
-      [src]="'http://localhost:1337' + product.img[0].url"
-      alt="product-img"
-      class="product-img"
-    />
-    <p class="product-name">
-      {{ product.name }} x {{product | quantity : userCart.orders }}
-    </p>
-    <p class="product-price">{{ product.price }} $</p>
-    <div class="cart-actions">
-      <button mat-stroked-button color="warn" class="btn" (click) = "removeFromCart(product)">Remove</button>
-    </div>
-  </div>
+  <app-order-item 
+    *ngFor="let product of cartProducts"
+    [product]="product"
+    (decrementClick)="removeFromCart(product)"
+    (incrementClick)="addToCart(product)"
+    (quantityChanged)="updateQuantity($event)">
+  </app-order-item>
   <mat-divider></mat-divider>
 
   <p class="total-price">Total = {{ getTotal | number }} $</p>

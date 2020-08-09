@@ -14,13 +14,13 @@ export class ProfilePageComponent implements OnInit {
   }
 
   get userAddress() {
-    return this.addressService.getUserAddress()
+    return this.addressService.getUserAddresses()
   }
 
   constructor(private userService:UserService, private addressService:AddressService) { }
 
   ngOnInit(): void {
-    this.addressService.fetchUserAddress()
+    setTimeout(() => this.addressService.fetchUserAddress(this.user.id))
   }
 
 }

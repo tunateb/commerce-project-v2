@@ -58,14 +58,17 @@ export class CartService {
       orders: []
     }
 
-    return this.http.post(`${env.cartsApiURL}`, newCart, httpOptions)
+    this.http.post(`${env.cartsApiURL}`, newCart, httpOptions)
+      .subscribe((response: Cart) => {
+        this.userCart = response
+      })
   }
 
   addToCart(newProduct: Product, userId: number) {
     const existingOrder = this.userCart.orders.find(order => order.product === newProduct.id)
 
     if (existingOrder) {
-      this.orderService.updateOrder(existingOrder)
+      this.orderService.updateOrder(existingOrder, existingOrder.quantity + 1)
         .subscribe(response => {
           this.fetchUserCart(userId)
         })
@@ -81,7 +84,6 @@ export class CartService {
   }
 
   updateCart(orderId: number, userId: number) {
-    console.log('usercart11', this.userCart)
     const token = window.localStorage.getItem('token');
     const httpOptions = {
       headers: { Authorization: `Bearer ${token}` },
@@ -100,18 +102,20 @@ export class CartService {
   }
 
   removeFromCart(product: Product, userId: number) {
-    // const productIndex = this.userCart.products.findIndex(
-    //   (p) => p.id === product.id
-    // );
+    const existingOrder = this.userCart.orders.find(order => order.product === product.id)
 
-    // this.userCart.products.splice(productIndex, 1);
+    if (!existingOrder) return;
 
-    // const updatedCart: Cart = {
-    //   products: this.userCart.products,
-    //   user: userId,
-    //   id: this.userCart.id,
-    // };
-
-    // this.updateOrCreateCart(updatedCart);
+    if (existingOrder.quantity > 1) {
+      this.orderService.updateOrder(existingOrder, existingOrder.quantity - 1)
+        .subscribe(response => {
+          this.fetchUserCart(userId)
+        })
+    } else {
+      this.orderService.deleteOrder(existingOrder.id)
+        .subscribe(response => {
+          this.fetchUserCart(userId)
+        })
+    }
   }
 }

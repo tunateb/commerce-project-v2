@@ -27,7 +27,7 @@ export class OrderService {
     return this.http.post(env.orderApiURL, newOrder, httpOptions)
   }
 
-  updateOrder(existingOrder) {
+  updateOrder(existingOrder, n: number) {
     const token = window.localStorage.getItem('token')
     const httpOptions = {
       headers: {
@@ -37,9 +37,20 @@ export class OrderService {
 
     const updatedOrder = {
       ...existingOrder,
-      quantity: existingOrder.quantity + 1
+      quantity: n
     }
 
     return this.http.put(`${env.orderApiURL}/${existingOrder.id}`, updatedOrder, httpOptions)
+  }
+
+  deleteOrder(orderId) {
+    const token = window.localStorage.getItem('token')
+    const httpOptions = {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }
+
+    return this.http.delete(`${env.orderApiURL}/${orderId}`, httpOptions)
   }
 }

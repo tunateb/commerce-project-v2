@@ -11,16 +11,15 @@ export class AddressService {
 
   constructor(private http: HttpClient) {}
 
-  fetchUserAddress() {
+  fetchUserAddress(userId) {
     this.http
-      .get(`${env.addressApiURL}/?user=2`)
+      .get(`${env.addressApiURL}/?user=${userId}`)
       .subscribe((response: Address) => {
-        // console.log(response);
         this.userAddress = response;
       });
   }
 
-  getUserAddress() {
+  getUserAddresses() {
     return this.userAddress;
   }
 }
