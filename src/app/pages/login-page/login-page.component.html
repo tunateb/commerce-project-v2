@@ -1,6 +1,6 @@
 <div class="card">
   <form [formGroup]="loginForm" (ngSubmit)="login()">
-    <p class="form-error" *ngIf="errorMsg">{{errorMsg}}</p>
+    <p class="form-error" *ngIf="errorMsg">{{ errorMsg }}</p>
     <div class="form-control">
       <label for="identifier">
         Email or Username
@@ -10,17 +10,17 @@
           id="identifier"
           formControlName="identifier"
         />
-        <!-- <div *ngIf="identifierErrors">
 
-          <small *ngIf="identifierErrors.required">
-            {{identifierErrors.required}}
+        <div *ngIf="loginForm.controls.identifier.touched">
+          <small *ngIf="identifier.errors?.required" class="error">
+            *This field is required
           </small>
-
-          <small *ngIf="identifierErrors.minLength">
-            {{identifierErrors.minLength}}
+          <small *ngIf="identifier.errors?.minlength" class="error">
+            *Must be at least
+            {{ identifier.errors.minlength.requiredLength }} characters long
+            (You have entered {{ identifier.errors.minlength.actualLength }}).
           </small>
-
-        </div> -->
+        </div>
       </label>
     </div>
 
@@ -33,11 +33,30 @@
           id="password"
           formControlName="password"
         />
+
+        <div *ngIf="loginForm.controls.password.touched">
+          <small *ngIf="password.errors?.required" class="error">
+            *This field is required
+          </small>
+          <small *ngIf="password.errors?.minlength" class="error">
+            *Must be at least
+            {{ password.errors.minlength.requiredLength }} characters long (You
+            have entered {{ password.errors.minlength.actualLength }}).
+          </small>
+        </div>
       </label>
     </div>
 
     <div class="form-actions">
-      <button mat-raised-button color="primary" class="btn" type="submit" [disabled] = "isLoading"> {{isLoading ? 'Loading...' : 'Login'}} </button>
+      <button
+        mat-raised-button
+        color="primary"
+        class="btn"
+        type="submit"
+        [disabled]="isLoading"
+      >
+        {{ isLoading ? "Loading..." : "Login" }}
+      </button>
     </div>
   </form>
 </div>

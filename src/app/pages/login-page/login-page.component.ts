@@ -4,7 +4,7 @@ import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
 import { AuthResponse } from '../../types/authResponse.type';
 import { CartService } from 'src/app/services/cart.service';
-import {FormGroup, FormControl, Validators} from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login-page',
@@ -15,17 +15,23 @@ export class LoginPageComponent implements OnInit {
   isLoading: boolean = false;
   errorMsg: string = '';
   loginForm = new FormGroup({
-    identifier: new FormControl('', [Validators.required, Validators.min(3)]),
-    password: new FormControl('', [Validators.required, Validators.min(6)])
-  })
+    identifier: new FormControl('', [
+      Validators.required,
+      Validators.minLength(3),
+    ]),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(6),
+    ]),
+  });
 
-  // get identifierErrors() {
-  //   return this.form.errors && this.form.errors.identifier;
-  // }
+  get identifier() {
+    return this.loginForm.get('identifier');
+  }
 
-  // get passwordErrors() {
-  //   return this.form.errors && this.form.errors.password;
-  // }
+  get password() {
+    return this.loginForm.get('password');
+  }
 
   constructor(
     private authService: AuthService,
@@ -37,27 +43,26 @@ export class LoginPageComponent implements OnInit {
   ngOnInit(): void {}
 
   login() {
-    console.log(this.loginForm)
+    console.log(this.loginForm);
     if (this.loginForm.valid) {
       this.isLoading = true;
       this.errorMsg = '';
 
-      this.authService.login(this.loginForm.value).subscribe(
-        this.loginSuccess.bind(this),
-        this.loginError
-      );
+      this.authService
+        .login(this.loginForm.value)
+        .subscribe(this.loginSuccess.bind(this), this.loginError);
     }
   }
 
   loginError = (error) => {
-    this.errorMsg = error.message
-    this.isLoading = false
-  }
+    this.errorMsg = error.message;
+    this.isLoading = false;
+  };
 
   loginSuccess(response) {
     this.authService.setToken(response.jwt);
     this.userService.setUser(response.user);
-    this.cartService.fetchUserCart(response.user.id)
+    this.cartService.fetchUserCart(response.user.id);
 
     this.isLoading = false;
     this.loginForm.reset();
