@@ -13,8 +13,9 @@ export class CheckoutPageComponent implements OnInit {
   cardNumber: string;
   expDate: string;
   cvc: string;
+  selectedAddress: number;
 
-  get userAddress() {
+  get userAddresses() {
     return this.addressService.getUserAddresses();
   }
 
@@ -29,11 +30,10 @@ export class CheckoutPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    setTimeout(() => this.addressService.fetchUserAddress(this.user.id))
+    setTimeout(() => this.addressService.fetchUserAddress())
   }
 
   purchase() {
-    const selectedAddress = this.userAddress[0].id
     const cardDetails = {
       cardName: this.cardName,
       cardNumber: this.cardNumber,
@@ -41,13 +41,14 @@ export class CheckoutPageComponent implements OnInit {
       cvc: this.cvc
     }
 
-    this.purchaseService.purchase(cardDetails, selectedAddress)
+    this.purchaseService.purchase(cardDetails, this.selectedAddress)
       .subscribe(response => {
         console.log('PURCHASED!!', response)
         this.cardName = '';
         this.cardNumber = '';
         this.expDate = '';
         this.cvc = '';
+        this.selectedAddress = null;
       })
   }
 }

@@ -5,16 +5,13 @@
       <h3>SHIPPING DETAILS</h3>
       <mat-divider></mat-divider>
 
-      <div *ngFor="let address of userAddress" class="user-details">
-        <div>
-          <p>{{ address.user.fullname }}</p>
-          <p>{{ address.streetName }}</p>
-          <p>{{ address.suite }}</p>
-          <p>{{ address.city }} / {{ address.country }}</p>
-        </div>
-        <div>
-          <p>{{ address.user.email }}</p>
-        </div>
+      <div class="user-details">
+        <mat-radio-group [(ngModel)]="selectedAddress">
+          <mat-radio-button *ngFor="let address of userAddresses" [value]="address.id">
+            <p>{{address.name}}</p>
+            <p>{{address.streetName}} {{address.suite}} {{address.city}} {{address.country}}</p>
+          </mat-radio-button>
+        </mat-radio-group>
       </div>
 
       <div class="payment-details">

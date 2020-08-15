@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -33,13 +33,19 @@ import { CheckoutPageComponent } from './pages/checkout-page/checkout-page.compo
 import { QuantityPipe } from './pipes/quantity.pipe';
 import { OrderItemComponent } from './components/order-item/order-item.component';
 import { AutoFocusDirective } from './directives/auto-focus.directive';
+import { AddressDialogComponent } from './pages/dialogs/address-dialog/address-dialog.component';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
-  declarations: [AppComponent, LoginPageComponent, RegisterPageComponent, NavbarComponent, HomePageComponent, ProfilePageComponent, ProductCardComponent, SidebarComponent, CartComponent, CheckoutPageComponent, QuantityPipe, OrderItemComponent, AutoFocusDirective],
+  declarations: [AppComponent, LoginPageComponent, RegisterPageComponent, NavbarComponent, HomePageComponent, ProfilePageComponent, ProductCardComponent, SidebarComponent, CartComponent, CheckoutPageComponent, QuantityPipe, OrderItemComponent, AutoFocusDirective, AddressDialogComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
     MatToolbarModule,
@@ -56,7 +62,10 @@ import { AutoFocusDirective } from './directives/auto-focus.directive';
     MatIconModule,
     MatDialogModule,
     MatInputModule,
-    
+    MatExpansionModule,
+    MatProgressSpinnerModule,
+    MatRadioModule,
+    MatSnackBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
