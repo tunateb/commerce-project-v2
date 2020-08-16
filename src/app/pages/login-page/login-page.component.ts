@@ -43,7 +43,7 @@ export class LoginPageComponent implements OnInit {
   ngOnInit(): void {}
 
   login() {
-    console.log(this.loginForm);
+    
     if (this.loginForm.valid) {
       this.isLoading = true;
       this.errorMsg = '';

@@ -4,7 +4,8 @@ import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
 import { AuthResponse } from 'src/app/types/authResponse.type';
 import { CartService } from 'src/app/services/cart.service';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-register-page',
@@ -13,13 +14,45 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 })
 export class RegisterPageComponent implements OnInit {
   isLoading: boolean = false;
-  form = {
-    username: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-  };
-  errorMsg = ''
+
+  registerForm = new FormGroup({
+    username: new FormControl('', [
+      Validators.required,
+      Validators.minLength(3),
+    ]),
+    email: new FormControl('', [
+      Validators.required,
+      Validators.pattern(
+        /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      ),
+    ]),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(6),
+    ]),
+    confirmPassword: new FormControl('', [
+      Validators.required,
+      Validators.minLength(6),
+    ]),
+  });
+
+  errorMsg = '';
+
+  get username() {
+    return this.registerForm.get('username');
+  }
+
+  get email() {
+    return this.registerForm.get('email');
+  }
+
+  get password() {
+    return this.registerForm.get('password');
+  }
+
+  get confirmPassword() {
+    return this.registerForm.get('confirmPassword');
+  }
 
   constructor(
     private authService: AuthService,
@@ -34,25 +67,18 @@ export class RegisterPageComponent implements OnInit {
   register() {
     this.isLoading = true;
 
-    const registerData = {
-      username: this.form.username,
-      email: this.form.email,
-      password: this.form.password,
-    };
-
-    this.authService
-      .register(registerData)
-      .subscribe(
-        this.registerSuccess,
-        (error) => {
-          console.error('EEEE', error)
-          this.errorMsg = error.message
+    if (this.registerForm.valid) {
+      this.authService
+        .register(this.registerForm.value)
+        .subscribe(this.registerSuccess.bind(this), (error) => {
+          console.error('EEEE', error);
+          this.errorMsg = error.message;
           this._snackbar.open(error.message, 'OK', {
-            duration: 5000
-          })
+            duration: 5000,
+          });
           this.isLoading = false;
-        }
-      );
+        });
+    }
   }
 
   registerSuccess(response: AuthResponse) {
@@ -60,12 +86,7 @@ export class RegisterPageComponent implements OnInit {
     this.authService.setToken(response.jwt);
     this.cartService.createCart(response.user.id);
 
-    this.form = {
-      username: '',
-      email: '',
-      password: '',
-      confirmPassword: '',
-    };
+    this.registerForm.reset();
 
     this.isLoading = false;
     this.errorMsg = '';

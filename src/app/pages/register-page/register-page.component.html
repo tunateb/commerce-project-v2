@@ -1,22 +1,48 @@
 <div class="card">
-  <form (submit)="register()">
+  <form (ngSubmit)="register()" [formGroup] = "registerForm">
     <p class="form-error" *ngIf="errorMsg">{{errorMsg}}</p>
-    <div class="form-control">
+
+  <div class="form-control">
       <label for="username">
         Username
         <input
           type="text"
           name="username"
           id="username"
-          [(ngModel)]="form.username"
+          formControlName="username"
         />
+
+        <div *ngIf="registerForm.controls.username.touched">
+          <small *ngIf="username.errors?.required" class="error">
+            *This field is required
+          </small>
+          <small *ngIf="username.errors?.minlength" class="error">
+            *Must be at least
+            {{ username.errors.minlength.requiredLength }} characters long
+            (You have entered {{ username.errors.minlength.actualLength }}).
+          </small>
+        </div>
       </label>
     </div>
 
     <div class="form-control">
       <label for="email">
         Email
-        <input type="email" name="email" id="email" [(ngModel)]="form.email" />
+        <input
+          type="email"
+          name="email"
+          id="email"
+          formControlName="email"
+        />
+
+        <div *ngIf="registerForm.controls.email.touched">
+          <small *ngIf="email.errors?.required" class="error">
+            *This field is required
+          </small>
+          <small *ngIf="email.invalid" class="error">
+            *Invalid E-mail address.
+          </small>
+        </div>
       </label>
     </div>
 
@@ -27,25 +53,53 @@
           type="password"
           name="password"
           id="password"
-          [(ngModel)]="form.password"
+          formControlName="password"
         />
+
+        <div *ngIf="registerForm.controls.password.touched">
+          <small *ngIf="password.errors?.required" class="error">
+            *This field is required
+          </small>
+          <small *ngIf="password.errors?.minlength" class="error">
+            *Must be at least
+            {{ password.errors.minlength.requiredLength }} characters long (You
+            have entered {{ password.errors.minlength.actualLength }}).
+          </small>
+        </div>
       </label>
     </div>
 
     <div class="form-control">
-      <label for="confirm-password">
+      <label for="confirmPassword">
         Confirm Password
         <input
           type="password"
-          name="confirm-password"
-          id="confirm-password"
-          [(ngModel)]="form.confirmPassword"
+          name="confirmPassword"
+          id="confirmPassword"
+          formControlName="confirmPassword"
         />
+
+        <div *ngIf="registerForm.controls.confirmPassword.touched">
+          <small *ngIf="confirmPassword.errors?.required" class="error">
+            *This field is required
+          </small>
+          <small *ngIf="confirmPassword.errors?.minlength" class="error">
+            *Must be at least
+            {{ confirmPassword.errors.minlength.requiredLength }} characters long (You
+            have entered {{ confirmPassword.errors.minlength.actualLength }}).
+          </small>
+        </div>
       </label>
     </div>
 
     <div class="form-actions">
-      <button mat-raised-button color="primary" class="btn" type="submit" [disabled]="isLoading">
+      <button
+        mat-raised-button
+        color="primary"
+        class="btn"
+        type="submit"
+        [disabled]="isLoading"
+      >
         {{ isLoading ? "Loading..." : "Register" }}
       </button>
     </div>
