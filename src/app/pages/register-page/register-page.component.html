@@ -83,10 +83,8 @@
           <small *ngIf="confirmPassword.errors?.required" class="error">
             *This field is required
           </small>
-          <small *ngIf="confirmPassword.errors?.minlength" class="error">
-            *Must be at least
-            {{ confirmPassword.errors.minlength.requiredLength }} characters long (You
-            have entered {{ confirmPassword.errors.minlength.actualLength }}).
+          <small *ngIf="registerForm.controls['confirmPassword'].hasError('NoPassswordMatch')" class="error">
+            *Passwords do not match!
           </small>
         </div>
       </label>

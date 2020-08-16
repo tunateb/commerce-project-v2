@@ -5,7 +5,8 @@ import { UserService } from '../../services/user.service';
 import { AuthResponse } from 'src/app/types/authResponse.type';
 import { CartService } from 'src/app/services/cart.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { CustomValidators } from 'src/app/validators/custom-validators';
 
 @Component({
   selector: 'app-register-page',
@@ -15,26 +16,45 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class RegisterPageComponent implements OnInit {
   isLoading: boolean = false;
 
-  registerForm = new FormGroup({
-    username: new FormControl('', [
-      Validators.required,
-      Validators.minLength(3),
-    ]),
-    email: new FormControl('', [
-      Validators.required,
-      Validators.pattern(
-        /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      ),
-    ]),
-    password: new FormControl('', [
-      Validators.required,
-      Validators.minLength(6),
-    ]),
-    confirmPassword: new FormControl('', [
-      Validators.required,
-      Validators.minLength(6),
-    ]),
-  });
+  public registerForm: FormGroup;
+
+  // registerForm = new FormGroup({
+  //   username: new FormControl('', [
+  //     Validators.required,
+  //     Validators.minLength(3),
+  //   ]),
+  //   email: new FormControl('', [
+  //     Validators.required,
+  //     Validators.pattern(
+  //       /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  //     ),
+  //   ]),
+  //   password: new FormControl('', [
+  //     Validators.required,
+  //     Validators.minLength(6),
+  //   ]),
+  //   confirmPassword: new FormControl('', [Validators.required]),
+  // });
+
+  createSignupForm(): FormGroup {
+    return this.fb.group(
+      {
+        username: [
+          null,
+          Validators.compose([Validators.required]),
+        ],
+        email: [
+          null,
+          Validators.compose([Validators.email, Validators.required]),
+        ],
+        password: [null, Validators.compose([Validators.minLength(6)])],
+        confirmPassword: [null, Validators.compose([Validators.required])],
+      },
+      {
+        validator: CustomValidators.passwordMatchValidator,
+      }
+    );
+  }
 
   errorMsg = '';
 
@@ -59,8 +79,11 @@ export class RegisterPageComponent implements OnInit {
     private userService: UserService,
     private cartService: CartService,
     private router: Router,
-    private _snackbar: MatSnackBar
-  ) {}
+    private _snackbar: MatSnackBar,
+    private fb: FormBuilder
+  ) {
+    this.registerForm = this.createSignupForm();
+  }
 
   ngOnInit(): void {}
 
