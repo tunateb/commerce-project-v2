@@ -39,13 +39,15 @@ export class RegisterPageComponent implements OnInit {
   createSignupForm(): FormGroup {
     return this.fb.group(
       {
-        username: [
-          null,
-          Validators.compose([Validators.required]),
-        ],
+        username: [null, Validators.compose([Validators.required])],
         email: [
           null,
-          Validators.compose([Validators.email, Validators.required]),
+          Validators.compose([
+            Validators.required,
+            Validators.pattern(
+              /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            ),
+          ]),
         ],
         password: [null, Validators.compose([Validators.minLength(6)])],
         confirmPassword: [null, Validators.compose([Validators.required])],
