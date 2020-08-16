@@ -4,7 +4,7 @@ import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
 import { AuthResponse } from '../../types/authResponse.type';
 import { CartService } from 'src/app/services/cart.service';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login-page',
@@ -14,17 +14,21 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class LoginPageComponent implements OnInit {
   isLoading: boolean = false;
   errorMsg: string = '';
-  loginForm = new FormGroup({
-    identifier: new FormControl('', [
-      Validators.required,
-      Validators.minLength(3),
-    ]),
-    password: new FormControl('', [
-      Validators.required,
-      Validators.minLength(6),
-    ]),
-  });
 
+  public loginForm: FormGroup;
+
+  createLoginForm(): FormGroup {
+    return this.fb.group({
+      identifier: [
+        null,
+        Validators.compose([Validators.required, Validators.minLength(3)]),
+      ],
+      password: [
+        null,
+        Validators.compose([Validators.minLength(6), Validators.required]),
+      ],
+    });
+  }
   get identifier() {
     return this.loginForm.get('identifier');
   }
@@ -37,13 +41,15 @@ export class LoginPageComponent implements OnInit {
     private authService: AuthService,
     private userService: UserService,
     private cartService: CartService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private fb: FormBuilder
+  ) {
+    this.loginForm = this.createLoginForm();
+  }
 
   ngOnInit(): void {}
 
   login() {
-    
     if (this.loginForm.valid) {
       this.isLoading = true;
       this.errorMsg = '';
